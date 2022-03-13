@@ -1,0 +1,141 @@
+#if 0
+ /********************************************************************
+ Created: 2002/02/03
+ File name: version.rc
+ Purpose: version-structure resource
+
+ Copyright (c) 2014 MainConcept GmbH or its affiliates.  All rights reserved.
+
+ MainConcept and its logos are registered trademarks of MainConcept GmbH or its affiliates.
+ This software is protected by copyright law and international treaties.  Unauthorized
+ reproduction or distribution of any portion is prohibited by law.
+
+*********************************************************************/
+#endif
+
+#ifndef MC_VERSION_OFFICIAL
+#define VER_PRIVATEBUILD  VS_FF_PRIVATEBUILD
+#else
+#define VER_PRIVATEBUILD  0
+#endif
+#ifndef MC_VERSION_FINAL
+#define VER_PRERELEASE    VS_FF_PRERELEASE
+#else
+#define VER_PRERELEASE    0
+#endif
+#if defined(DEBUG_RETAIL) || defined(DEBUG)
+#define VER_DEBUG   VS_FF_DEBUG    
+#else
+#define VER_DEBUG   0
+#endif
+#define MC_VERSION_FLAGS          (VER_PRIVATEBUILD|VER_PRERELEASE|VER_DEBUG)
+#define MC_VERSION_FILEFLAGSMASK  0x0030003FL
+
+#ifndef MC_VERSION_COMMENTS
+  #define MC_VERSION_COMMENTS  "official release build\0"
+  #if VER_PRIVATEBUILD
+  #undef MC_VERSION_COMMENTS  
+  #define MC_VERSION_COMMENTS  "private release build\0"
+  #endif
+  #if VER_PRERELEASE
+  #undef MC_VERSION_COMMENTS  
+  #define MC_VERSION_COMMENTS  "prerelease build\0"
+  #endif
+  #ifdef MC_VERSION_BETA
+  #undef MC_VERSION_COMMENTS  
+  #define MC_VERSION_COMMENTS  "beta build\0"
+  #endif
+  #if VER_DEBUG
+  #undef MC_VERSION_COMMENTS  
+  #define MC_VERSION_COMMENTS  "debug build\0"
+  #endif
+#endif
+#ifndef MC_VERSION_COMPANYNAME
+  #define MC_VERSION_COMPANYNAME  COMPANY_NAME
+#endif
+#ifndef MC_VERSION_COPYRIGHT
+  #define MC_VERSION_COPYRIGHT    "Copyright\251 " COMPANY_NAME " 2000-" MC_VERSION_YEAR
+#endif
+#ifndef MC_VERSION_PRODUCTNAME
+  #define MC_VERSION_PRODUCTNAME  COMPANY_SHORTNAME "\256 " MC_VERSION_DESCRIPTION
+#endif
+#ifndef MC_VERSION_NAME_POSTFIX
+  #define MC_VERSION_NAME_POSTFIX ""
+#endif
+#ifndef MC_VERSION_STR
+  #define MC_VERSION_STR          MC_VERSION_NAME MC_VERSION_NAME_POSTFIX "\0"
+#endif
+#ifndef MC_VERSION_PRODUCT_STR
+  #define MC_VERSION_PRODUCT_STR MC_VERSION_NAME_SHORT "\0"
+#endif
+#ifndef MC_VERSION_FILEDESCRIPTION
+ #define MC_VERSION_FILEDESCRIPTION MC_VERSION_DESCRIPTION
+#endif
+
+VS_VERSION_INFO VERSIONINFO
+
+FILEVERSION MC_VERSION_MAJOR, MC_VERSION_MINOR, MC_VERSION_REVISION1, MC_VERSION_REVISION2
+
+PRODUCTVERSION MC_VERSION_MAJOR, MC_VERSION_MINOR, MC_VERSION_REVISION1, MC_VERSION_REVISION2
+
+FILEFLAGSMASK MC_VERSION_FILEFLAGSMASK
+FILEFLAGS MC_VERSION_FLAGS
+
+#if defined(WIN64)
+FILEOS VOS_NT_WINDOWS32
+#elif defined(WIN32)
+FILEOS VOS_DOS_WINDOWS32
+#else
+FILEOS VOS_DOS_WINDOWS16
+#endif
+
+FILETYPE MC_VERSION_TYPE
+
+FILESUBTYPE MC_VERSION_SUBTYPE
+
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904E4"
+    BEGIN
+#ifdef MC_VERSION_ACTIVEMOVIE
+			VALUE "ActiveMovie",		 MC_VERSION_ACTIVEMOVIE "\0"
+#endif
+      VALUE "CompanyName",     MC_VERSION_COMPANYNAME "\0"
+      VALUE "FileDescription", MC_VERSION_DESCRIPTION "\0"
+      VALUE "FileVersion",     MC_VERSION_STR "\0"
+      VALUE "InternalName",    MC_VERSION_INTERNALNAME "\0"
+      VALUE "LegalCopyright",  MC_VERSION_COPYRIGHT "\0"
+      VALUE "OriginalFilename",MC_VERSION_FILENAME "\0"
+      VALUE "ProductName",     MC_VERSION_PRODUCTNAME "\0"
+      VALUE "ProductVersion",  MC_VERSION_STR "\0"
+#ifdef MC_VERSION_COMMENTS
+      VALUE "Comments",        MC_VERSION_COMMENTS "\0"
+#endif
+#ifdef MC_VERSION_TRADEMARK
+      VALUE "LegalTrademarks", MC_VERSION_VERSIONTRADEMARK "\0"
+#endif
+#ifdef MC_VERSION_OLESELFREGISTER
+			VALUE "OLESelfRegister", MC_VERSION_OLESELFREGISTER "\0"
+#endif
+
+#ifdef MC_VERSION_PRIVATEBUILD
+      VALUE "PrivateBuild", MC_VERSION_PRIVATEBUILD "\0"
+#else
+      VALUE "PrivateBuild", MC_VERSION_DESCRIPTION "\0"
+#endif
+#ifdef MC_VERSION_SPECIALDESCRIPTION
+      VALUE "SpecialBuild", MC_VERSION_SPECIALDESCRIPTION "\0"
+#endif
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+#ifdef MC_VERSION_LANGUAGE
+    VALUE "Translation", MC_VERSION_LANGUAGE, MC_VERSION_CHARSET
+#else
+    VALUE "Translation", 0x409, 1252  // English, Multilingual
+#endif
+  END
+END
+

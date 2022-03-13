@@ -1,0 +1,14 @@
+import "oaidl.idl";
+import "ocidl.idl";
+
+/*!
+Structure for stream time information.
+*/
+[uuid(A5AA2ACD-BEA0-4570-9232-D8301A6DAE0F)] 
+struct StreamTimeInfo {
+	 unsigned int    PID;       //!< stream PID
+	 LONGLONG        PTS;       //!< presentation timestamp taken from stream
+	 LONGLONG        TimeStamp; //!< current timestamp for filter graph
+};
+
+cpp_quote("typedef struct StreamTimeInfo StreamTimeInfo;")

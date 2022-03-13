@@ -1,0 +1,9 @@
+#define MC_VERSION_MAJOR       13
+#define MC_VERSION_MINOR       0
+#define MC_VERSION_REVISION1   0
+#define MC_VERSION_REVISION2   4361
+#define MC_VERSION_NAME        "13.0.0.4361"
+#define MC_VERSION_NAME_SHORT  "13.0.0"
+#define MC_VERSION_DATE        "2021-06-29"
+#define MC_VERSION_TIME        "15:59:23"
+#define MC_VERSION_YEAR        "2021"

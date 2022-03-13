@@ -1,0 +1,373 @@
+/********************************************************************
+ Created: 2015/04/08
+ File name: video_types_guids.h
+ Purpose: GUIDs for Video media subtypes
+
+ Copyright (c) 2015 MainConcept GmbH. All rights reserved.
+
+ This software is the confidential and proprietary information of
+ MainConcept GmbH and may be used only in accordance with the terms of
+ your license from MainConcept GmbH.
+
+*********************************************************************/
+
+#ifndef __VIDEO_TYPES_GUIDS_H__
+#define __VIDEO_TYPES_GUIDS_H__
+
+#include <aviriff.h>
+#include <mmreg.h>
+#include <mmsystem.h>
+#include <wmcodecdsp.h>
+
+#define MC_DEFINE_GUID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) \
+  static const GUID name \
+  = { l, w1, w2, { b1, b2,  b3,  b4,  b5,  b6,  b7,  b8 } }
+
+#define MC_DEFINE_STANDARD_GUID(name, format) \
+  MC_DEFINE_GUID(name,                       \
+  format, 0x0000, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71);
+
+#define MC_DEFINE_VIDEO_GUID(name, format) MC_DEFINE_STANDARD_GUID(name, format)
+
+#define MC_DEFINE_AUDIO_GUID(name, format) MC_DEFINE_STANDARD_GUID(name, format)
+
+#define MC_FCC(ch4) ((((DWORD)(ch4) & 0xFF) << 24) |     \
+  (((DWORD)(ch4) & 0xFF00) << 8) |    \
+  (((DWORD)(ch4) & 0xFF0000) >> 8) |  \
+  (((DWORD)(ch4) & 0xFF000000) >> 24))
+
+#define MC_MAKE_FOURCC(ch0, ch1, ch2, ch3)  \
+  ((DWORD)(BYTE)(ch0) | ((DWORD)(BYTE)(ch1) << 8) | \
+  ((DWORD)(BYTE)(ch2) << 16) | ((DWORD)(BYTE)(ch3) << 24 ))
+
+/**************************************************************************************/
+/**   HEVC Video                                                                     **/
+/**************************************************************************************/
+
+// {55B845A5-8169-4BE7-BA63-6C4C2C01266D}
+static const GUID MEDIASUBTYPE_MC_HEVC =
+{0x55b845a5, 0x8169, 0x4be7, {0xba, 0x63, 0x6c, 0x4c, 0x2c, 0x1, 0x26, 0x6d} };
+
+// {43564548-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_HEVC, MC_FCC('HEVC'));
+
+// {63766568-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_hevc, MC_FCC('hevc'));
+
+// {35363248-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_H265, MC_FCC('H265'));
+
+// {35363268-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_h265, MC_FCC('h265'));
+
+// {31435648-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_HVC1, MC_FCC('HVC1'));
+
+// {31637668-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_hvc1, MC_FCC('hvc1'));
+
+/**************************************************************************************/
+/**   H264 Video                                                                     **/
+/**************************************************************************************/
+
+// {48535356-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_VSSH, MC_FCC('VSSH'));
+
+// {8D2D71CB-243F-45E3-B2D8-5FD7967EC09B}
+static const GUID MEDIASUBTYPE_MC_H264 =
+{0x8d2d71cb, 0x243f, 0x45e3, {0xb2, 0xd8, 0x5f, 0xd7, 0x96, 0x7e, 0xc0, 0x9b} };
+
+// {8D2D71CC-243F-45E3-B2D8-5FD7967EC09B}
+static const GUID MEDIASUBTYPE_MC_H264_NALU =
+{0x8d2d71cc, 0x243f, 0x45e3, {0xb2, 0xd8, 0x5f, 0xd7, 0x96, 0x7e, 0xc0, 0x9b} };
+
+// {00F99064-70D5-4BCC-9D88-3801F3E3881B}
+static const GUID CLSID_H264_FFDSHOW =
+{0x00f99064, 0x70d5, 0x4bcc, {0x9d, 0x88, 0x38, 0x01, 0xf3, 0xe3, 0x88, 0x1b} };
+
+/**************************************************************************************/
+/**   ProRes Video                                                                   **/
+/**************************************************************************************/
+// {6E637061-0000-0010-8000-00AA00389B71}
+static const GUID MEDIASUBTYPE_MC_apcn =
+{0x6E637061, 0x0000, 0x0010, {0x80, 0x00, 0x00, 0xAA, 0x00, 0x38, 0x9B, 0x71} };
+
+// {68637061-0000-0010-8000-00AA00389B71}
+static const GUID MEDIASUBTYPE_MC_apch =
+{0x68637061, 0x0000, 0x0010,{ 0x80, 0x00, 0x00, 0xAA, 0x00, 0x38, 0x9B, 0x71 } };
+
+// {73637061-0000-0010-8000-00AA00389B71}
+static const GUID MEDIASUBTYPE_MC_apcs =
+{0x73637061, 0x0000, 0x0010,{ 0x80, 0x00, 0x00, 0xAA, 0x00, 0x38, 0x9B, 0x71 } };
+
+// {6F637061-0000-0010-8000-00AA00389B71}
+static const GUID MEDIASUBTYPE_MC_apco =
+{0x6F637061, 0x0000, 0x0010,{ 0x80, 0x00, 0x00, 0xAA, 0x00, 0x38, 0x9B, 0x71 } };
+
+// {68347061-0000-0010-8000-00AA00389B71}
+static const GUID MEDIASUBTYPE_MC_ap4h =
+{0x68347061, 0x0000, 0x0010,{ 0x80, 0x00, 0x00, 0xAA, 0x00, 0x38, 0x9B, 0x71 } };
+
+// {78347061-0000-0010-8000-00AA00389B71}
+static const GUID MEDIASUBTYPE_MC_ap4x =
+{ 0x78347061, 0x0000, 0x0010,{ 0x80, 0x00, 0x00, 0xAA, 0x00, 0x38, 0x9B, 0x71 } };
+
+/**************************************************************************************/
+/**   DV 100 Video                                                                   **/
+/**************************************************************************************/
+
+// {31645641-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_DV100_720P, MC_FCC('AVd1'));
+
+// {6E645641-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_AVdn, MC_FCC('AVdn'));
+
+/**************************************************************************************/
+/**   H263 Video                                                                     **/
+/**************************************************************************************/
+
+// {33363268-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_H263, MC_FCC('H263'));
+
+// {33363268-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_h263, MC_FCC('h263'));
+
+/**************************************************************************************/
+/**   VC-3 Video                                                                     **/
+/**************************************************************************************/
+
+// {33435657-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_WVC3, MC_FCC('WVC3'));
+
+/**************************************************************************************/
+/**   J2K Video                                                                      **/
+/**************************************************************************************/
+
+// {31626d64-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_dmb1, MC_FCC('dmb1'));
+
+// {43324a4d-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_MJ2C, MC_FCC('MJ2C'));
+
+// {32706a6d-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_MJP2, MC_FCC('MJP2'));
+
+// {32504A4D-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_mjp2, MC_FCC('mjp2'));
+
+/**************************************************************************************/
+/**   XviD Video                                                                     **/
+/**************************************************************************************/
+
+// {XVID-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_XVID, MC_FCC('XVID'));
+
+// {xvid-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_xvid, MC_FCC('xvid'));
+
+// {XviD-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_XviD, MC_FCC('XviD'));
+
+/**************************************************************************************/
+/**   MPEG-4 Video                                                                   **/
+/**************************************************************************************/
+
+// {MP4V-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_MP4V, MC_FCC('MP4V'));
+
+// {mp4v-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_mp4v, MC_FCC('mp4v'));
+
+/**************************************************************************************/
+/**   DivX Video                                                                     **/
+/**************************************************************************************/
+
+// {A963763D-B0A4-4f81-A296-C43199C389B4}
+static const GUID MEDIASUBTYPE_MC_DIVX =
+{0xa963763d, 0xb0a4, 0x4f81, {0xa2, 0x96, 0xc4, 0x31, 0x99, 0xc3, 0x89, 0xb4} };
+
+// {DIVX-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_DIVX, MC_FCC('DIVX'));
+
+// {divx-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_divx, MC_FCC('divx'));
+
+// {DivX-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_DivX, MC_FCC('DivX'));
+
+// {Div3-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_Div3, MC_FCC('Div3'));
+
+// {Div4-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_Div4, MC_FCC('Div4'));
+
+// {Div5-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_Div5, MC_FCC('Div5'));
+
+// {DX50-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_DX50, MC_FCC('DX50'));
+
+// {dx50-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_dx50, MC_FCC('dx50'));
+
+/**************************************************************************************/
+/**   Chinese AVS                                                                    **/
+/**************************************************************************************/
+
+// {56535641-0000-0010-8000-00aa00389b71}
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_AVSV, MC_FCC('AVSV'));
+
+/**************************************************************************************/
+/**   Flash Video                                                                    **/
+/**************************************************************************************/
+
+// 46365056-0000-0010-8000-00AA00389B71
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_VP6F, MC_FCC('VP6F'))
+
+// 46365056-0000-0010-8000-00AA00389B71
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_FSV1, MC_FCC('FSV1'));
+
+// 46365056-0000-0010-8000-00AA00389B71
+MC_DEFINE_VIDEO_GUID(MEDIASUBTYPE_FSV2, MC_FCC('FSV2'));
+
+/**************************************************************************************/
+/**   RAW Video Types                                                                **/
+/**************************************************************************************/
+
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_VUYA, MC_FCC('VUYA'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_VYUY, MC_FCC('VYUY'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_YuYv, MC_FCC('YuYv'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_UyVy, MC_FCC('UyVy'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_YUV9, MC_FCC('YUV9'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_YV16, MC_FCC('YV16'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_I420, MC_FCC('I420'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_I422, MC_FCC('I422'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_YV24, MC_FCC('YV24'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_I444, MC_FCC('I444'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_NV21, MC_FCC('NV21'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_NV11, MC_FCC('NV11'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_Y210, MC_FCC('Y210'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_Y216, MC_FCC('Y216'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_Y410, MC_FCC('Y410'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_Y416, MC_FCC('Y416'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_P210, MC_FCC('P210'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_P216, MC_FCC('P216'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_P010, MC_FCC('P010'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_P016, MC_FCC('P016'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_v210, MC_FCC('v210'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_v216, MC_FCC('v216'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_v410, MC_FCC('v410'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_410P, MC_FCC('410P'));     // yvu410
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_411P, MC_FCC('411P'));     // yvu411
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_211P, MC_FCC('211P'));     // yvu211
+
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W009, MC_FCC('W009'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W010, MC_FCC('W010'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W011, MC_FCC('W011'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W012, MC_FCC('W012'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W013, MC_FCC('W013'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W014, MC_FCC('W014'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W015, MC_FCC('W015'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W016, MC_FCC('W016'));
+
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W209, MC_FCC('W209'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W210, MC_FCC('W210'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W211, MC_FCC('W211'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W212, MC_FCC('W212'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W213, MC_FCC('W213'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W214, MC_FCC('W214'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W215, MC_FCC('W215'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W216, MC_FCC('W216'));
+
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W409, MC_FCC('W409'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W410, MC_FCC('W410'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W411, MC_FCC('W411'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W412, MC_FCC('W412'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W413, MC_FCC('W413'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W414, MC_FCC('W414'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W415, MC_FCC('W415'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_W416, MC_FCC('W416'));
+
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X009, MC_FCC('X009'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X010, MC_FCC('X010'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X011, MC_FCC('X011'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X012, MC_FCC('X012'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X013, MC_FCC('X013'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X014, MC_FCC('X014'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X015, MC_FCC('X015'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X016, MC_FCC('X016'));
+
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X209, MC_FCC('X209'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X210, MC_FCC('X210'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X211, MC_FCC('X211'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X212, MC_FCC('X212'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X213, MC_FCC('X213'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X214, MC_FCC('X214'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X215, MC_FCC('X215'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X216, MC_FCC('X216'));
+
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X409, MC_FCC('X409'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X410, MC_FCC('X410'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X411, MC_FCC('X411'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X412, MC_FCC('X412'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X413, MC_FCC('X413'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X414, MC_FCC('X414'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X415, MC_FCC('X415'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_X416, MC_FCC('X416'));
+
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_XYZ8, MC_MAKE_FOURCC('X', 'Y', 'Z', 0x08));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_XYZ12, MC_MAKE_FOURCC('X', 'Y', 'Z', 0x0C));
+MC_DEFINE_VIDEO_GUID(J2K_MEDIASUBTYPE_XYZ12, MC_FCC('XYZC'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_PL_XYZ8, MC_MAKE_FOURCC('P', 'X', 'Y', 0x08));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_PL_XYZ9, MC_MAKE_FOURCC('P', 'X', 'Y', 0x09));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_PL_XYZ10, MC_MAKE_FOURCC('P', 'X', 'Y', 0x0A));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_PL_XYZ11, MC_MAKE_FOURCC('P', 'X', 'Y', 0x0B));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_PL_XYZ12, MC_MAKE_FOURCC('P', 'X', 'Y', 0x0C));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_PL_XYZ13, MC_MAKE_FOURCC('P', 'X', 'Y', 0x0D));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_PL_XYZ14, MC_MAKE_FOURCC('P', 'X', 'Y', 0x0E));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_PL_XYZ15, MC_MAKE_FOURCC('P', 'X', 'Y', 0x0F));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_PL_XYZ16, MC_MAKE_FOURCC('P', 'X', 'Y', 0x10));
+
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_RGBA, MC_FCC('RGBA'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_argb, MC_FCC('argb'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_RGB3, MC_FCC('RGB3'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_R24C, MC_FCC('R24C'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_R32C, MC_FCC('R32C'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_DPX10, MC_MAKE_FOURCC('D', 'P', 'X', 0x0A));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_R24P, MC_FCC('R24P'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_R27P, MC_FCC('R27P'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_R30P, MC_FCC('R30P'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_R33P, MC_FCC('R33P'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_R36P, MC_FCC('R36P'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_R39P, MC_FCC('R39P'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_R42P, MC_FCC('R42P'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_R45P, MC_FCC('R45P'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_R48P, MC_FCC('R48P'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_B64A, MC_FCC('B64A'));
+
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_BGRA32F, MC_FCC('B32F'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_VUYA32F, MC_FCC('Y32F'));
+
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_GRAY, MC_FCC('GRAY'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_Y09, MC_MAKE_FOURCC(' ', 'Y', '0', '9'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_Y10, MC_MAKE_FOURCC(' ', 'Y', '1', '0'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_Y11, MC_MAKE_FOURCC(' ', 'Y', '1', '1'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_Y12, MC_MAKE_FOURCC(' ', 'Y', '1', '2'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_Y13, MC_MAKE_FOURCC(' ', 'Y', '1', '3'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_Y14, MC_MAKE_FOURCC(' ', 'Y', '1', '4'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_Y15, MC_MAKE_FOURCC(' ', 'Y', '1', '5'));
+MC_DEFINE_VIDEO_GUID(MC_MEDIASUBTYPE_Y16, MC_MAKE_FOURCC(' ', 'Y', '1', '6'));
+
+// Media subtype planar 4:2:2 YV16
+// {7C63D475-46D7-4466-8EB3-817315AB3137}
+static const GUID VC3_MEDIASUBTYPE_YV16 =
+{ 0x7c63d475, 0x46d7, 0x4466, { 0x8e, 0xb3, 0x81, 0x73, 0x15, 0xab, 0x31, 0x37 } };
+
+#undef MC_DEFINE_STANDARD_GUID
+#undef MC_DEFINE_AUDIO_GUID
+#undef MC_DEFINE_VIDEO_GUID
+#undef MC_DEFINE_GUID
+#undef MC_FCC
+#undef MC_MAKE_FOURCC
+
+#endif //__VIDEO_TYPES_GUIDS_H__

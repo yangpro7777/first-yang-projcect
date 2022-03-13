@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mcbuildng>
+    <target name="strmbase" type="staticcomponent">
+		<define MCPLATFORM_OS="win32,win64">UUID8EB16AD416A54F3495C637192E194AD5 /Zc:wchar_t</define>
+		<define MCPLATFORM_OS="win32,win64">UNICODE</define>
+		<define MCPLATFORM_OS="win32,win64">_UNICODE</define>
+        <includepath>.</includepath>
+		<file>amextra.cpp</file>
+		<file>amfilter.cpp</file>
+		<file>amvideo.cpp</file>
+		<file>arithutil.cpp</file>
+		<file>combase.cpp</file>
+		<file>cprop.cpp</file>
+		<file>ctlutil.cpp</file>
+		<file>ddmm.cpp</file>
+		<file>dllentry.cpp</file>
+		<file>dllsetup.cpp</file>
+		<file>mtype.cpp</file>
+		<file>outputq.cpp</file>
+		<file>perflog.cpp</file>
+		<file>pstream.cpp</file>
+		<file>pullpin.cpp</file>
+		<file>refclock.cpp</file>
+		<file>renbase.cpp</file>
+		<file>schedule.cpp</file>
+		<file>seekpt.cpp</file>
+		<file>source.cpp</file>
+		<file>strmctl.cpp</file>
+		<file>sysclock.cpp</file>
+		<file>transfrm.cpp</file>
+		<file>transip.cpp</file>
+		<file>videoctl.cpp</file>
+		<file>vtrans.cpp</file>
+		<file>winctrl.cpp</file>
+		<file>winutil.cpp</file>
+		<file>wxdebug.cpp</file>
+		<file>wxlist.cpp</file>
+		<file>wxutil.cpp</file>
+    </target>
+</mcbuildng>

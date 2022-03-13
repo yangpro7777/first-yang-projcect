@@ -1,0 +1,93 @@
+cpp_quote("/********************************************************************")
+cpp_quote(" File name: ModuleConfig.h")
+cpp_quote(" Purpose: IModuleConfig interfaces definitions")
+cpp_quote("")
+cpp_quote(" Copyright (c) 2015 MainConcept GmbH or its affiliates.  All rights reserved.")
+cpp_quote("")
+cpp_quote(" MainConcept and its logos are registered trademarks of MainConcept GmbH or its affiliates.")
+cpp_quote(" This software is protected by copyright law and international treaties.")
+cpp_quote(" Unauthorized reproduction or distribution of any portion is prohibited by law.")
+cpp_quote("*********************************************************************/")
+cpp_quote("")
+cpp_quote("")
+cpp_quote("////////////////////////////////////////////////////////////////////////////////")
+cpp_quote("//")
+cpp_quote("//    Original file name: CACryptoProvider.idl")
+cpp_quote("//")
+cpp_quote("////////////////////////////////////////////////////////////////////////////////")
+cpp_quote("")
+cpp_quote("// {092A150B-3DA6-4C29-9F7F-719C40202F14}")
+cpp_quote("static const GUID IID_ICACryptoFactory = ")
+cpp_quote(" { 0x92a150b, 0x3da6, 0x4c29, { 0x9f, 0x7f, 0x71, 0x9c, 0x40, 0x20, 0x2f, 0x14 } };")
+cpp_quote("")
+cpp_quote("// {BCB9E1F2-B517-4A42-B3C0-FDFD27FB5D78}")
+cpp_quote("static const GUID IID_ICATSDecryptorProvider = ")
+cpp_quote(" { 0xbcb9e1f2, 0xb517, 0x4a42, { 0xb3, 0xc0, 0xfd, 0xfd, 0x27, 0xfb, 0x5d, 0x78 } };")
+cpp_quote("")
+cpp_quote("// {37F5B8B5-C338-4143-B81B-0562BD87CF11}")
+cpp_quote("static const GUID IID_ICATSDecryptor = ")
+cpp_quote(" { 0x37f5b8b5, 0xc338, 0x4143, { 0xb8, 0x1b, 0x5, 0x62, 0xbd, 0x87, 0xcf, 0x11 } };")
+cpp_quote("")
+cpp_quote("// {E7CBF7A3-84BE-445C-A1E8-216D5D6DEC3F}")
+cpp_quote("static const GUID IID_ICACryptoProvider = ")
+cpp_quote(" { 0xe7cbf7a3, 0x84be, 0x445c, { 0xa1, 0xe8, 0x21, 0x6d, 0x5d, 0x6d, 0xec, 0x3f } };")
+cpp_quote("")
+
+
+
+import "oaidl.idl";
+import "ocidl.idl";
+import "crypto_ca.h";
+
+[
+    object,
+    local,
+    uuid(37F5B8B5-C338-4143-B81B-0562BD87CF11),
+    pointer_default(unique)
+]
+interface ICATSDecryptor : IUnknown
+{
+    [helpstring("Decrypt buffer in place")]
+    HRESULT Decrypt([in][out] unsigned char* pBuffer, [in] unsigned int iBufferLength);
+}
+
+[
+    object,
+    local,
+    uuid(BCB9E1F2-B517-4A42-B3C0-FDFD27FB5D78),
+    pointer_default(unique)
+]
+interface ICATSDecryptorProvider: IUnknown
+{
+    [helpstring("Create decryptor with static keys")]
+        HRESULT CreateStaticTSDecryptor([out] ICATSDecryptor** pDecryptor,
+            [in] enum eCA_TS_Mode eCryptoAlgorithm, [in] enum eCA_TS_BlockTermMode eBlockTerminationMode,
+            [in] const unsigned char* pKey, [in] unsigned int iKeyLength,
+            [in] const unsigned char* pIV1, [in] unsigned int iIV1Length,
+            [in] const unsigned char* pIV2, [in] unsigned int iIV2Length);
+
+}
+
+[
+    object,
+    local,
+    uuid(092A150B-3DA6-4C29-9F7F-719C40202F14),
+    pointer_default(unique)
+]
+interface ICACryptoFactory : IUnknown
+{
+    [helpstring("Create decryptor based on stream parameters")]
+    HRESULT GetDecryptor([out] ICATSDecryptor** pDecryptor, [in] const long prog_num, [in] const long pid);
+}
+
+[
+    object,
+    local,
+    uuid(E7CBF7A3-84BE-445C-A1E8-216D5D6DEC3F),
+    pointer_default(unique)
+]
+interface ICACryptoProvider : IUnknown
+{
+    [helpstring("Create decryptor provider")]
+    HRESULT GetDecryptorProvider([out] ICATSDecryptorProvider** pDecryptor);
+}
